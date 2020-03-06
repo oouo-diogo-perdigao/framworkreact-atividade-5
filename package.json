@@ -1,0 +1,18 @@
+{
+  "name": "movies-ssr",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
+    "axios": "^0.19.2",
+    "next": "9.2.2",
+    "react": "16.13.0",
+    "react-dom": "16.13.0"
+  }
+}
