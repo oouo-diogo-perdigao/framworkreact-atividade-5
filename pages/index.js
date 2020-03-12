@@ -1,203 +1,192 @@
-import Head from 'next/head'
+import React from "react";
+import { MoviesService } from "../assets/services/MoviesService";
 
-const Home = () => (
-  <div className="container">
-    <Head>
-      <title>Create Next App</title>
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
+import Link from "next/link";
+import Head from "next/head";
 
-    <main>
-      <h1 className="title">
-        Welcome to <a href="https://nextjs.org">Next.js!</a>
-      </h1>
-
-      <p className="description">
-        Get started by editing <code>pages/index.js</code>
-      </p>
-
-      <div className="grid">
-        <a href="https://nextjs.org/docs" className="card">
-          <h3>Documentation &rarr;</h3>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a href="https://nextjs.org/learn" className="card">
-          <h3>Learn &rarr;</h3>
-          <p>Learn about Next.js in an interactive course with quizzes!</p>
-        </a>
-
-        <a
-          href="https://github.com/zeit/next.js/tree/master/examples"
-          className="card"
-        >
-          <h3>Examples &rarr;</h3>
-          <p>Discover and deploy boilerplate example Next.js projects.</p>
-        </a>
-
-        <a
-          href="https://zeit.co/new?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          className="card"
-        >
-          <h3>Deploy &rarr;</h3>
-          <p>
-            Instantly deploy your Next.js site to a public URL with ZEIT Now.
-          </p>
-        </a>
-      </div>
-    </main>
-
-    <footer>
-      <a
-        href="https://zeit.co?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Powered by <img src="/zeit.svg" alt="ZEIT Logo" />
-      </a>
-    </footer>
-
-    <style jsx>{`
-      .container {
-        min-height: 100vh;
-        padding: 0 0.5rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-
-      main {
-        padding: 5rem 0;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-
-      footer {
-        width: 100%;
-        height: 100px;
-        border-top: 1px solid #eaeaea;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      footer img {
-        margin-left: 0.5rem;
-      }
-
-      footer a {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-
-      .title a {
-        color: #0070f3;
-        text-decoration: none;
-      }
-
-      .title a:hover,
-      .title a:focus,
-      .title a:active {
-        text-decoration: underline;
-      }
-
-      .title {
-        margin: 0;
-        line-height: 1.15;
-        font-size: 4rem;
-      }
-
-      .title,
-      .description {
-        text-align: center;
-      }
-
-      .description {
-        line-height: 1.5;
-        font-size: 1.5rem;
-      }
-
-      code {
-        background: #fafafa;
-        border-radius: 5px;
-        padding: 0.75rem;
-        font-size: 1.1rem;
-        font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-          DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-      }
-
-      .grid {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
-
-        max-width: 800px;
-        margin-top: 3rem;
-      }
-
-      .card {
-        margin: 1rem;
-        flex-basis: 45%;
-        padding: 1.5rem;
-        text-align: left;
-        color: inherit;
-        text-decoration: none;
-        border: 1px solid #eaeaea;
-        border-radius: 10px;
-        transition: color 0.15s ease, border-color 0.15s ease;
-      }
-
-      .card:hover,
-      .card:focus,
-      .card:active {
-        color: #0070f3;
-        border-color: #0070f3;
-      }
-
-      .card h3 {
-        margin: 0 0 1rem 0;
-        font-size: 1.5rem;
-      }
-
-      .card p {
-        margin: 0;
-        font-size: 1.25rem;
-        line-height: 1.5;
-      }
-
-      @media (max-width: 600px) {
-        .grid {
-          width: 100%;
-          flex-direction: column;
+function Home(props) {
+  return (
+    <div>
+      <Head>
+        <title>Create Next App</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <main>
+        <table className="table-fill">
+          <thead>
+            <tr>
+              <th className="text-left">Filme</th>
+            </tr>
+          </thead>
+          <tbody className="table-hover">
+            {props.films.map(f => (
+              <tr key={f.id}>
+                <td>
+                  <Link href={"/movie-detail/" + f.id}>
+                    <a>{f.title}</a>
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </main>
+      <style jsx>{`
+        @import url(
+          https://fonts.googleapis.com/css?family=Roboto:400,
+          500,
+          700,
+          300,
+          100
+        );
+        body {
+          background-color: #3e94ec;
+          font-family: "Roboto", helvetica, arial, sans-serif;
+          font-size: 16px;
+          font-weight: 400;
+          text-rendering: optimizeLegibility;
         }
-      }
-    `}</style>
 
-    <style jsx global>{`
-      html,
-      body {
-        padding: 0;
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-          Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-      }
+        div.table-title {
+          display: block;
+          margin: auto;
+          max-width: 600px;
+          padding: 5px;
+          width: 100%;
+        }
 
-      * {
-        box-sizing: border-box;
-      }
-    `}</style>
-  </div>
-)
+        .table-title h3 {
+          color: #fafafa;
+          font-size: 30px;
+          font-weight: 400;
+          font-style: normal;
+          font-family: "Roboto", helvetica, arial, sans-serif;
+          text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+          text-transform: uppercase;
+        }
 
-export default Home
+        /*** Table Styles **/
+
+        .table-fill {
+          background: white;
+          border-radius: 3px;
+          border-collapse: collapse;
+          height: 320px;
+          margin: auto;
+          max-width: 600px;
+          padding: 5px;
+          width: 100%;
+          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+          animation: float 5s infinite;
+        }
+
+        th {
+          color: #d5dde5;
+          background: #1b1e24;
+          border-bottom: 4px solid #9ea7af;
+          border-right: 1px solid #343a45;
+          font-size: 23px;
+          font-weight: 100;
+          padding: 24px;
+          text-align: left;
+          text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+          vertical-align: middle;
+        }
+
+        th:first-child {
+          border-top-left-radius: 3px;
+        }
+
+        th:last-child {
+          border-top-right-radius: 3px;
+          border-right: none;
+        }
+
+        tr {
+          border-top: 1px solid #c1c3d1;
+          border-bottom-: 1px solid #c1c3d1;
+          color: #666b85;
+          font-size: 16px;
+          font-weight: normal;
+          text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+        }
+
+        tr:hover td {
+          background: #4e5066;
+          color: #ffffff;
+          border-top: 1px solid #22262e;
+        }
+
+        tr:first-child {
+          border-top: none;
+        }
+
+        tr:last-child {
+          border-bottom: none;
+        }
+
+        tr:nth-child(odd) td {
+          background: #ebebeb;
+        }
+
+        tr:nth-child(odd):hover td {
+          background: #4e5066;
+        }
+
+        tr:last-child td:first-child {
+          border-bottom-left-radius: 3px;
+        }
+
+        tr:last-child td:last-child {
+          border-bottom-right-radius: 3px;
+        }
+
+        td {
+          background: #ffffff;
+          padding: 20px;
+          text-align: left;
+          vertical-align: middle;
+          font-weight: 300;
+          font-size: 18px;
+          text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+          border-right: 1px solid #c1c3d1;
+        }
+
+        td:last-child {
+          border-right: 0px;
+        }
+
+        th.text-left {
+          text-align: left;
+        }
+
+        th.text-center {
+          text-align: center;
+        }
+
+        th.text-right {
+          text-align: right;
+        }
+
+        td.text-left {
+          text-align: left;
+        }
+
+        td.text-center {
+          text-align: center;
+        }
+
+        td.text-right {
+          text-align: right;
+        }
+      `}</style>
+    </div>
+  );
+}
+
+Home.getInitialProps = async () => {
+  const results = await MoviesService.getPopularMovies();
+  return { films: results.data.results };
+};
+
+export default Home;
